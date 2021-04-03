@@ -10,7 +10,7 @@ class StoreModel(db.Model):
     name = db.Column(db.String(80), unique=True)
 
     items = db.relationship('ItemModel', lazy='dynamic') #backward relationship to get the coreesponding items
-
+    
     def __init__(self,name):
         self.name = name
 
