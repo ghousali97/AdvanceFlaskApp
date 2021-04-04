@@ -4,7 +4,10 @@ from flask_jwt import JWT, jwt_required
 from security import authenticate, identity #these are the functions we created
 from resources.user import UserRegister
 from resources.item import Item, ItemList
-from resources.store import Store, StoreList 
+from resources.store import Store, StoreList
+
+
+
 app =Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False #prevents the app from tracking the changes being made by SLQALCHAMY this prevents un necassary resource usage
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db' #tells SQL alchmet that data.db lives on the root folder of our app
