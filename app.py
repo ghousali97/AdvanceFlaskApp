@@ -17,9 +17,7 @@ jwt = JWT(app, authenticate, identity) #create /auth endpoint
                                     #once authenticated JWT returns a JWT token in response to /authenticate
                                     #on subsequent requests JWT token is passed to identy which returns a user object.
                                     #auth request should have content-type JSON
-@app.before_first_request
-def create_table():
-    db.create_all() #creates all the tables as spcified elsewhere in the program
+ #creates all the tables as spcified elsewhere in the program
 
 api = Api(app) #Api works with resourcs and every resource has to be a class.
 
