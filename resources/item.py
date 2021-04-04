@@ -103,7 +103,6 @@ class Item(Resource):
                 item.save_to_db()
             except:
                 return { "message":"Store with ID {} does not exist".format(data['sid'])}, 400
-                }
         return item.json(),200
 
         """connection = sqlite3.connect('data.db')
