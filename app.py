@@ -5,12 +5,14 @@ from security import authenticate, identity #these are the functions we created
 from resources.user import UserRegister
 from resources.item import Item, ItemList
 from resources.store import Store, StoreList
-
+import os
 
 
 app =Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False #prevents the app from tracking the changes being made by SLQALCHAMY this prevents un necassary resource usage
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db' #tells SQL alchmet that data.db lives on the root folder of our app
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL',  'sqlite:///data.db') #if database url is not set we will us sqlite3
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db' #tells SQL alchmet that data.db lives on the root folder of our app
+
 app.secret_key = "key" #secret key that needs to be protected in future
 jwt = JWT(app, authenticate, identity) #create /auth endpoint
                                     #when we call /auth we send it username and password which is passed to authenticate function
@@ -34,4 +36,4 @@ api.add_resource(UserRegister, '/register')
 if __name__ == "__main__":
     from db import db
     db.init_app(app)
-    app.run()
+    app.run(port=5000) #uWSGI will set the port automatically based on run.py()
